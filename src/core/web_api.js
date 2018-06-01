@@ -19,10 +19,21 @@ class Auth0WebAPI {
     }
 
     this.clients[lockID] = new Auth0APIClient(lockID, clientID, domain, opts);
+    this.clients[`${lockID}:SP-SSO`] = new Auth0APIClient(
+      lockID,
+      clientID,
+      opts.sp_sso_domain,
+      opts
+    );
   }
 
   logIn(lockID, options, authParams, cb) {
-    this.clients[lockID].logIn(options, authParams, cb);
+    if (!authParams.password) {
+      // sp initiated sso, probably
+      this.clients[`${lockID}:SP-SSO`].logIn(options, authParams, cb);
+    } else {
+      this.clients[lockID].logIn(options, authParams, cb);
+    }
   }
 
   logout(lockID, query) {
