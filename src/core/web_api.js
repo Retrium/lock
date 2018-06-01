@@ -28,7 +28,7 @@ class Auth0WebAPI {
   }
 
   logIn(lockID, options, authParams, cb) {
-    if (!authParams.password) {
+    if (options.connection !== 'Username-Password-Authentication') {
       // sp initiated sso, probably
       this.clients[`${lockID}:SP-SSO`].logIn(options, authParams, cb);
     } else {
