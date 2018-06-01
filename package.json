@@ -1,5 +1,5 @@
 {
-  "name": "auth0-lock",
+  "name": "@retrium/auth0-lock",
   "version": "11.7.0",
   "description": "Auth0 Lock",
   "author": "Auth0 <support@auth0.com> (http://auth0.com)",
